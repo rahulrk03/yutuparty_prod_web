@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Component/Header/Header';
+import Home from './Component/Home/Home';
+import Room from './Component/Room/Room'
+import {
+  Switch,
+  Route
+} from "react-router-dom";
+// import VideoUrlInput from './Component/Room/VideoUrlInput';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Switch>
+          <Route exact path="/" component= {Home}></Route>
+          <Route exact path="/home" component={Home}></Route>
+          <Route path="/room" component={Room}></Route>
+        </Switch> 
     </div>
   );
 }
