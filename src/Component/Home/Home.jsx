@@ -79,17 +79,17 @@ function Home(props) {
     return (
         <div>
             <div style={containerStyle}>
-            <div style= {createButtonStyle}  onClick={createHandleClick}>
-                <Button  variant="contained">
-                    <PersonAddIcon style={{ fontSize: "50px" }}></PersonAddIcon>
-                        Create a room
-                </Button>
+                <div style= {createButtonStyle}  onClick={createHandleClick}>
+                    <Button  variant="contained">
+                        <PersonAddIcon style={{ fontSize: "50px" }}></PersonAddIcon>
+                            Create a room
+                    </Button>
                 </div>
                 <div style= {joinButtonStyle} onClick={onClickJoinRoom}>
-                <Button variant="contained">
+                    <Button variant="contained">
                             <GroupIcon style={{ fontSize: "50px" }}></GroupIcon>
                                 Join a room
-                        </Button>
+                    </Button>
                 </div>
             </div>
         </div>

@@ -1,13 +1,15 @@
 import React, { useState, useRef} from 'react';
 import VideoUrlInput from './VideoUrlInput';
 import RoomIdBox from './RoomIdBox';
-import Divider from '@material-ui/core/Divider';
 import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
 function Room(props) {
     const location = useLocation();
+    const user = useSelector(state => state.userdetail.user);
+    console.log(user)
 
     const mainContainer ={
         marginLeft:20,
@@ -58,7 +60,6 @@ function Room(props) {
                 <div style={inputBoxStyle}>
                     <VideoUrlInput/>
                 </div>
-                <Divider orientation='vertical'/>
                 <div style={rightContainer}>
                     <div style={rightMainContainer}>
                         <div style={roomIdContainer}>

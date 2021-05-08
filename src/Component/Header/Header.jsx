@@ -10,6 +10,8 @@ import { CustomDialog } from 'react-st-modal';
 import UserNameModal from '../UserModal/UserNameModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {getUsersAction, setUsersAction } from './store/action'
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,9 +29,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const classes = useStyles();
     const [userName, setUserName] = useState('')
     const user = useSelector(state => state.userdetail.user);
+    
     const handleChange= async ()=> {
       const result = await CustomDialog(<UserNameModal userName={userName}/>, 
         {
@@ -38,6 +42,10 @@ function Header() {
         if (result){
          dispatch(setUsersAction(result));
         }
+    }
+
+    const homeHandle = () =>{
+      history.push('/')
     }
 
     useEffect(() => {
@@ -49,15 +57,18 @@ function Header() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                  <IconButton edge="start" 
+                  {/* <IconButton onClick={() => history.goBack()}
+                  edge="start" 
                   className={classes.menuButton} 
                   color="inherit" 
                   aria-label="menu"
                   >
-                    <HomeIcon />
-                  </IconButton>
-                <Typography variant="h6"  className={classes.title} onClick={handleChange}>
-                    Home
+                    <HomeIcon/>
+                  </IconButton> */}
+                <Typography variant="h6"  className={classes.title} onClick={homeHandle}>
+                  <div>
+                  <span>Home</span>
+                  </div>
                 </Typography>
                 <form>
                 <Typography variant="h6" className={classes.title} onClick={handleChange}>
