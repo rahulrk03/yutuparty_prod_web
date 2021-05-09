@@ -61,7 +61,7 @@ const [state, setState] = useState({
             <PlayerContainer onMouseOver={handleShowControls} ref={playerContainerRef}>
                 <ReactPlayer
                 ref={playerRef}
-                width='900px'
+                width='890px'
                 height='530px'
                 url="https://www.youtube.com/watch?v=-sr7ip_ykGA"
                 muted={muted}

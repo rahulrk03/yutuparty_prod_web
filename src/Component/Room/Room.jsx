@@ -3,6 +3,7 @@ import VideoUrlInput from './VideoUrlInput';
 import RoomIdBox from './RoomIdBox';
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import Chat from '../Chat/Chat'
 
 
 
@@ -14,7 +15,7 @@ function Room(props) {
     const mainContainer ={
         marginLeft:20,
         marginTop:10,
-        marginRight:10
+        // marginRight:10
     }
     const leftContainerStyle ={
         display: 'flex',
@@ -31,6 +32,7 @@ function Room(props) {
         display: 'flex', 
         flexDirection: 'column',
         flex: 1,
+        width:'100%',
         float:'right'
     }
 
@@ -39,9 +41,10 @@ function Room(props) {
         flexDirection:'column',
         // borderLeft: '6px solid green',
         display: 'inline-flex',
-        width:'100%',
+        width:'95%',
         height: '100%',
-        backgroundColor: '#202021',
+        marginLeft: 15
+        // backgroundColor: '#202021',
     }
     const roomIdContainer ={
         display:'flex',
@@ -66,7 +69,7 @@ function Room(props) {
                             <RoomIdBox roomId = {location.state.roomId}/>
                         </div>
                         <div style={chatContainer}>
-                            <em style={{color: "white"}}>Hello</em>
+                            <Chat />
                         </div>
                     </div>
                 </div>

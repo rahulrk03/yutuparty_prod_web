@@ -7,12 +7,15 @@ function RoomIdBox(props) {
         width: '100%',
         height:'20px',
         padding: '10px',
-        color: 'white',
-        fontFamily:"Arial"
+        // color: 'white',
+        // fontFamily:"Arial",
+        fontFamily: 'Arial, Helvetica, sans-serif',
     }
     return (
         <div style={idBoxStyle}>
-           <em>Room Id: {props.roomId}</em> 
+           <p>
+                <strong>Room Id: {props.roomId}</strong>
+            </p>
         </div>
     )
 }
