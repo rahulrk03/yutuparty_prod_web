@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import {apiEndPoints} from '../../../axios/endPoints';
 import {WebService} from '../../../axios/webServices';
 import { Creators } from './action';
@@ -9,8 +9,8 @@ export function* roomCreateSaga({ payload }) {
       yield put(Creators.createRoomStart());
       const response = yield WebService.post(apiEndPoints.createRoom);
       if (response.status >= 200 && response.status < 300) {
-        const {roomId} = response.data.data;
-        console.log(response.data.data)
+        // const {roomId} = response.data.data;
+        // console.log(response.data.data)
         yield put(Creators.createRoomSuccess(response.data.data));
 
       } else {

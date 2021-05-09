@@ -4,9 +4,11 @@
 import { takeLatest } from 'redux-saga/effects';
 import { Types } from './action';
 import { roomCreateSaga, roomJoinSaga } from '../Component/Home/store/saga'
+import { videoCreateSaga } from '../Component/Room/store/saga'
 
 export default function* rootSaga(){
     yield takeLatest(Types.CREATE_ROOM, roomCreateSaga);
-    yield takeLatest(Types.JOIN_ROOM, roomJoinSaga)
+    yield takeLatest(Types.JOIN_ROOM, roomJoinSaga);
+    yield takeLatest(Types.CREATE_VIDEO, videoCreateSaga)
 }
 

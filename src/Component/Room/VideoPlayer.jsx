@@ -13,7 +13,8 @@ import {
     VolumeButton,
   } from './VideoPlayerStyle';
 
-function VideoPlayer() {
+
+function VideoPlayer(props) {
 const playerRef = useRef(null);
 const playerContainerRef = useRef(null);
 const [state, setState] = useState({
@@ -63,7 +64,7 @@ const [state, setState] = useState({
                 ref={playerRef}
                 width='890px'
                 height='530px'
-                url="https://www.youtube.com/watch?v=-sr7ip_ykGA"
+                url= {props.videoUrl}
                 muted={muted}
                 playing={playing}
                 playbackRate={playbackRate}
