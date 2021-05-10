@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import SendIcon from '@material-ui/icons/Send';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       '& > *': {
+//         margin: theme.spacing(1),
+//       },
+//     },
+//   }));
 
 
 function ChatInput() {

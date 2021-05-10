@@ -1,8 +1,8 @@
-import React, { useState, useRef} from 'react';
+import React from 'react';
 import VideoUrlInput from './VideoUrlInput';
 import RoomIdBox from './RoomIdBox';
 import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Chat from '../Chat/Chat'
 
 
@@ -40,7 +40,7 @@ function Room(props) {
         display:'flex',
         flexDirection:'column',
         // borderLeft: '6px solid green',
-        display: 'inline-flex',
+        // display: 'inline-flex',
         width:'95%',
         height: '100%',
         marginLeft: 15

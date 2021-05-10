@@ -14,6 +14,11 @@ const { Types, Creators } = createActions({
     createVideoSuccess: ['payload'],
     createVideoFailure: ['payload'],
 
+    updateVideo: ['payload'],
+    updateVideoStart: ['payload'],
+    updateVideoSuccess: ['payload'],
+    updateVideoFailure: ['payload'],
+
     playVideo: ['payload'],
     playVideoStart: ['payload'],
     playVideoSuccess: ['payload'],

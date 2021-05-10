@@ -8,6 +8,7 @@ import ForwardSharpIcon from '@material-ui/icons/ForwardSharp';
 import VideoPlayer from './VideoPlayer';
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators } from './store';
+import {socket} from '../../webSocket/websocket';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VideoUrlInput() {
   const [value, setValue] = useState('');
+  const [url, setUrl] = useState('');
   const classes = useStyles();
   const videoPlayerStyle ={
       padding:1,
@@ -39,22 +41,33 @@ export default function VideoUrlInput() {
   }
 
   const dispatch = useDispatch();
-  const videoUrl = useSelector((store) => store.videoDetail.videoUrl);
-  const error = useSelector((store) => store.videoDetail.error);
-  const roomSuccess = useSelector((store) => store.videoDetail.success);
-
-  console.log(videoUrl)
+  // const videoUrl = useSelector((store) => store.videoDetail.videoUrl);
+  // const error = useSelector((store) => store.videoDetail.error);
+  // const roomSuccess = useSelector((store) => store.videoDetail.success);
+  // console.log(videoUrl)
 
   const onSubmitUrl = (event) =>{
     event.preventDefault()
-    console.log(value)
-    dispatch(Creators.createVideo(value))
-  }
-  useEffect(() => {
-    if (videoUrl){
-      setValue(videoUrl)
+    const payload = {
+      videoUrl: value
     }
-  }, [videoUrl])
+    dispatch(Creators.createVideo(payload))
+    setValue('')
+  }
+
+  useEffect(() => {
+    dispatch(Creators.updateVideo());
+  }, [dispatch]);
+
+
+  useEffect(() => {
+    socket.onmessage = (e) => {
+      const message1 = JSON.parse(e.data);
+      if (message1.videoUrl){
+        setUrl(message1.videoUrl)
+      }
+    }
+  }, [url])
 
 
   return (
@@ -65,6 +78,7 @@ export default function VideoUrlInput() {
                     className={classes.input}
                     placeholder="Enter Video Url"
                     inputProps={{ 'aria-label': 'enter video url' }}
+                    value={value}
                     onChange={(e) => {
                       setValue(e.target.value);
                       }}
@@ -77,7 +91,7 @@ export default function VideoUrlInput() {
             </Paper>
         </div>
         <div style={videoPlayerStyle}>
-            <VideoPlayer videoUrl={value}/>
+            <VideoPlayer videoUrl={url}/>
         </div>
     </>
   );

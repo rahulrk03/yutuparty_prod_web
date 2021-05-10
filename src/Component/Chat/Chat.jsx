@@ -10,7 +10,6 @@ export default function Chat() {
         flexDirection: 'column',
         width:'100%',
         height: '100%',
-        display: 'inline-flex',
     }
 
     const chatMessage = {

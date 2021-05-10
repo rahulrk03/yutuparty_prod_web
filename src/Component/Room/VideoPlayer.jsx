@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import PauseIcon from '@material-ui/icons/Pause';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
@@ -12,10 +12,14 @@ import {
     Controlls,
     VolumeButton,
   } from './VideoPlayerStyle';
+import { useSelector, useDispatch } from 'react-redux';
+import { Creators } from './store';
+import {socket} from '../../webSocket/websocket';
 
 
 function VideoPlayer(props) {
 const playerRef = useRef(null);
+const dispatch = useDispatch();
 const playerContainerRef = useRef(null);
 const [state, setState] = useState({
     playing: false,
@@ -32,7 +36,18 @@ const [state, setState] = useState({
 
 
   const handlePlayPause = () => {
-    setState({ ...state, playing: !state.playing });
+    // setState({ ...state, playing: !state.playing });
+    var playStatus;
+    if (!state.playing){
+      playStatus = "True"
+    }
+    else{
+      playStatus = "False"
+    }
+    const payload = {
+      playStatus: playStatus
+    }
+    dispatch(Creators.createVideo(payload))
   };
 
   const handleProgress = (changeState) => {
@@ -56,6 +71,24 @@ const [state, setState] = useState({
   const handleShowControls = () => {
     setState({ ...state, showControls: !showControls });
   };
+
+  useEffect(() => {
+    socket.onmessage = (e) => {
+      const message1 = JSON.parse(e.data);
+      if (message1.playStatus){
+        if (message1.playStatus = "True"){
+          console.log(message1.playStatus)
+          setState({ ...state, playing: true });
+        }
+        if (message1.playStatus = "False"){
+          setState({ ...state, playing: false });
+        }
+      }
+    }
+    
+  }, [state.playStatus])
+
+
     return (
         <div>
             <Container>

@@ -3,15 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
+// import HomeIcon from '@material-ui/icons/Home';
 import { CustomDialog } from 'react-st-modal';
 import UserNameModal from '../UserModal/UserNameModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {getUsersAction, setUsersAction } from './store/action'
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
