@@ -1,1 +1,1 @@
-export const socket = new WebSocket('ws://localhost:8000/ws/chat/55592107/')
+export const socket = new WebSocket('ws://localhost:8000/ws/chat/34384650/')

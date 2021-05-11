@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VideoUrlInput() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('https://www.youtube.com/watch?v=WKbwopSXLWU');
   const [url, setUrl] = useState('');
   const classes = useStyles();
   const videoPlayerStyle ={

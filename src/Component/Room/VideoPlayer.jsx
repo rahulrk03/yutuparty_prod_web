@@ -21,6 +21,7 @@ function VideoPlayer(props) {
 const playerRef = useRef(null);
 const dispatch = useDispatch();
 const playerContainerRef = useRef(null);
+const [playStatus, setPlayStatus] = useState(false)
 const [state, setState] = useState({
     playing: false,
     controls: false,
@@ -34,21 +35,18 @@ const [state, setState] = useState({
 
   const { playbackRate, muted, playing, showControls } = state;
 
-
-  const handlePlayPause = () => {
-    // setState({ ...state, playing: !state.playing });
-    var playStatus;
-    if (!state.playing){
-      playStatus = "True"
+  const handlePlayPause=(event)=>{
+    event.preventDefault();
+    setPlayStatus(!playStatus)
+    if (playStatus){
+        const message = {playStatus:"Stop"}
+        dispatch(Creators.createVideo(message))
     }
     else{
-      playStatus = "False"
+        const message = {playStatus:"Resume"}
+        dispatch(Creators.createVideo(message))
     }
-    const payload = {
-      playStatus: playStatus
-    }
-    dispatch(Creators.createVideo(payload))
-  };
+}
 
   const handleProgress = (changeState) => {
     setState({ ...state, ...changeState });
@@ -74,19 +72,16 @@ const [state, setState] = useState({
 
   useEffect(() => {
     socket.onmessage = (e) => {
-      const message1 = JSON.parse(e.data);
-      if (message1.playStatus){
-        if (message1.playStatus = "True"){
-          console.log(message1.playStatus)
-          setState({ ...state, playing: true });
+      console.log("Received message")
+        const message1 = JSON.parse(e.data);
+        if (message1.playStatus === "Resume"){
+            setPlayStatus(true)
         }
-        if (message1.playStatus = "False"){
-          setState({ ...state, playing: false });
+        else{
+            setPlayStatus(false)
         }
-      }
     }
-    
-  }, [state.playStatus])
+},[playStatus]);
 
 
     return (
@@ -99,7 +94,7 @@ const [state, setState] = useState({
                 height='530px'
                 url= {props.videoUrl}
                 muted={muted}
-                playing={playing}
+                playing={playStatus}
                 playbackRate={playbackRate}
                 onProgress={handleProgress}
                 onEnded={handleEnded}
@@ -110,7 +105,7 @@ const [state, setState] = useState({
                     <Controlls show={showControls} onMouseLeave={handleShowControls}>
                         <ControllsContainer className='controlls_container'>
                             <PlayButton onClick={handlePlayPause}>
-                                {playing ? <PauseIcon fontSize="large" style={{fill: "white"}}/> : 
+                                {playStatus ? <PauseIcon fontSize="large" style={{fill: "white"}}/> : 
                                         <PlayArrowIcon fontSize="large" style={{fill: "white"}}/>}
                             </PlayButton>
                             <VolumeButton onClick={handleToggleMuted}>
@@ -122,7 +117,6 @@ const [state, setState] = useState({
                 ) : (
                     ''
                 )}
-
       </Container>
         </div>
     )
