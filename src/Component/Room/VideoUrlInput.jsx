@@ -6,9 +6,9 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ForwardSharpIcon from '@material-ui/icons/ForwardSharp';
 import VideoPlayer from './VideoPlayer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Creators } from './store';
-import {socket} from '../../webSocket/websocket';
+// import {socket} from '../../webSocket/websocket';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VideoUrlInput() {
+export default function VideoUrlInput(props) {
+  const socket = props.socket
   const [value, setValue] = useState('https://www.youtube.com/watch?v=WKbwopSXLWU');
   const [url, setUrl] = useState('');
   const classes = useStyles();
@@ -49,7 +50,8 @@ export default function VideoUrlInput() {
   const onSubmitUrl = (event) =>{
     event.preventDefault()
     const payload = {
-      videoUrl: value
+      sendData: {videoUrl: value},
+      socket: props.socket
     }
     dispatch(Creators.createVideo(payload))
     setValue('')
@@ -98,7 +100,7 @@ export default function VideoUrlInput() {
             </Paper>
         </div>
         <div style={videoPlayerStyle}>
-            <VideoPlayer videoUrl={url}/>
+            <VideoPlayer videoUrl={url} socket={socket}/>
         </div>
     </>
   );

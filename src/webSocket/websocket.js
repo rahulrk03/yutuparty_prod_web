@@ -1,1 +1,2 @@
-export const socket = new WebSocket('ws://localhost:8000/ws/chat/34384650/')
+// export const webSocketEndpoint = "ws://localhost:8000/ws/chat/";
+export const webSocketEndpoint = "wss://api.yutuparty.com/ws/chat/";

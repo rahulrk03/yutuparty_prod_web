@@ -18,6 +18,7 @@ import { Creators } from './store';
 
 
 function VideoPlayer(props) {
+// const socket = props.socket
 const playerRef = useRef(null);
 const dispatch = useDispatch();
 const playerContainerRef = useRef(null);
@@ -40,12 +41,18 @@ const [state, setState] = useState({
     event.preventDefault();
     setPlayStatus(!playStatus)
     if (playStatus){
-        const message = {playStatus:"Stop"}
-        dispatch(Creators.createVideo(message))
+        const payload = {
+          sendData: {playStatus:"Stop"},
+          socket: props.socket
+        }
+        dispatch(Creators.createVideo(payload))
     }
     else{
-        const message = {playStatus:"Resume"}
-        dispatch(Creators.createVideo(message))
+      const payload = {
+        sendData:  {playStatus:"Resume"},
+        socket: props.socket
+      }
+        dispatch(Creators.createVideo(payload))
     }
 }
 

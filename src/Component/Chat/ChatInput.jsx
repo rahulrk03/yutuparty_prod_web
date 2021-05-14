@@ -15,15 +15,20 @@ import { Creators } from '../Room/store';
 //   }));
 
 
-function ChatInput() {
+function ChatInput(props) {
+    const socket = props.socket
 
     const [message, setMessage] = useState('');
     const dispatch = useDispatch()
     const onSubmitMessage = (event) =>{
         event.preventDefault()
+        // const payload = {
+        //     message: message
+        //   }
         const payload = {
-            message: message
-          }
+        sendData: {message: message},
+        socket: socket
+        }
         dispatch(Creators.createVideo(payload))
         setMessage('')
     }

@@ -2,14 +2,18 @@ import React from 'react';
 import VideoUrlInput from './VideoUrlInput';
 import RoomIdBox from './RoomIdBox';
 import { useLocation } from "react-router-dom";
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Chat from '../Chat/Chat'
+import {webSocketEndpoint} from '../../webSocket/websocket'
 
 
 
 function Room(props) {
     const location = useLocation();
-    const user = useSelector(state => state.userdetail.user);
+    // const webSocketUrl = webSocketEndpoint
+    const roomSocket = webSocketEndpoint + location.state.roomId + "/"
+    const socket = new WebSocket(roomSocket)
+    // const user = useSelector(state => state.userdetail.user);
 
     const mainContainer ={
         marginLeft:20,
@@ -60,7 +64,7 @@ function Room(props) {
         <div style={mainContainer}>
             <div style={leftContainerStyle}>
                 <div style={inputBoxStyle}>
-                    <VideoUrlInput/>
+                    <VideoUrlInput socket={socket}/>
                 </div>
                 <div style={rightContainer}>
                     <div style={rightMainContainer}>
@@ -68,7 +72,7 @@ function Room(props) {
                             <RoomIdBox roomId = {location.state.roomId}/>
                         </div>
                         <div style={chatContainer}>
-                            <Chat />
+                            <Chat socket = {socket}/>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {socket} from '../../webSocket/websocket';
-import { useSelector, useDispatch } from 'react-redux';
+// import {socket} from '../../webSocket/websocket';
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
-function ChatMessage() {
-
+function ChatMessage(props) {
+    // const socket = props.socket
     const [messages, setMessages] = useState([])
     const messageList = useSelector(state => state.videoDetail.message);
     // console.log(messageList)
@@ -24,7 +25,7 @@ function ChatMessage() {
         
         <div>
             {messages.map((message)=>(
-                    <p>{message}</p>
+                    <p key={uuidv4()}>{message}</p>
                 ))}
             {/* <p>
                 <strong>Rahul: </strong> <em>{messages}</em>

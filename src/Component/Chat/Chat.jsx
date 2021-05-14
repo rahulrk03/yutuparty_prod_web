@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {socket} from '../../webSocket/websocket';
+import React from 'react'
+// import {socket} from '../../webSocket/websocket';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
 import { Scrollbars } from 'rc-scrollbars';
 
-export default function Chat() {
-    const [messages, setMessages] = useState([])
+export default function Chat(props) {
+    // const [messages, setMessages] = useState([])
 
     const chatContainer = {
         display: 'flex', 
@@ -52,11 +52,11 @@ export default function Chat() {
             
             <div style={chatMessage}>
             <Scrollbars style={ scrollBarStyle}>
-                <ChatMessage />
+                <ChatMessage socket={props.socket}/>
             </Scrollbars>
             </div>
             <div style={chatInput}>
-                <ChatInput message={messages}/>
+                <ChatInput socket={props.socket}/>
             </div>
         </div>
     )
