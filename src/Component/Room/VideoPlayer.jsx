@@ -14,7 +14,7 @@ import {
   } from './VideoPlayerStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators } from './store';
-import {socket} from '../../webSocket/websocket';
+// import {socket} from '../../webSocket/websocket';
 
 
 function VideoPlayer(props) {
@@ -34,6 +34,7 @@ const [state, setState] = useState({
 });
 
   const { playbackRate, muted, playing, showControls } = state;
+  const videoPlayStatus = useSelector(state => state.videoDetail.playStatus);
 
   const handlePlayPause=(event)=>{
     event.preventDefault();
@@ -70,18 +71,11 @@ const [state, setState] = useState({
     setState({ ...state, showControls: !showControls });
   };
 
+
   useEffect(() => {
-    socket.onmessage = (e) => {
-      console.log("Received message")
-        const message1 = JSON.parse(e.data);
-        if (message1.playStatus === "Resume"){
-            setPlayStatus(true)
-        }
-        else{
-            setPlayStatus(false)
-        }
-    }
-},[playStatus]);
+    console.log("PlayStatus is ", videoPlayStatus)
+    setPlayStatus(videoPlayStatus)
+  }, [videoPlayStatus])
 
 
     return (

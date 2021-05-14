@@ -55,19 +55,26 @@ export default function VideoUrlInput() {
     setValue('')
   }
 
-  useEffect(() => {
-    dispatch(Creators.updateVideo());
-  }, [dispatch]);
 
 
   useEffect(() => {
     socket.onmessage = (e) => {
       const message1 = JSON.parse(e.data);
+      console.log(message1)
       if (message1.videoUrl){
         setUrl(message1.videoUrl)
       }
+      if (message1.playStatus && message1.playStatus === "Resume"){
+        dispatch(Creators.playVideo(true))
+      }
+      if (message1.playStatus && message1.playStatus === "Stop"){
+        dispatch(Creators.playVideo(false))
+      }
+      if (message1.message){
+        dispatch(Creators.chatUpdate(message1.message))
+      }
     }
-  }, [url])
+  })
 
 
   return (

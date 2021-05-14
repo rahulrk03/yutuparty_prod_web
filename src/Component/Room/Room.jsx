@@ -10,7 +10,6 @@ import Chat from '../Chat/Chat'
 function Room(props) {
     const location = useLocation();
     const user = useSelector(state => state.userdetail.user);
-    console.log(user)
 
     const mainContainer ={
         marginLeft:20,

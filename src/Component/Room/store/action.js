@@ -23,6 +23,12 @@ const { Types, Creators } = createActions({
     playVideoStart: ['payload'],
     playVideoSuccess: ['payload'],
     playVideoFailure: ['payload'],
+
+    chatUpdate: ['payload'],
+    chatUpdateStart: ['payload'],
+    chatUpdateSuccess: ['payload'],
+    chatUpdateFailure: ['payload'],
+
 })
 
 export { Types, Creators };

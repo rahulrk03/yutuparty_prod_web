@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
+import {socket} from '../../webSocket/websocket';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
 import { Scrollbars } from 'rc-scrollbars';
 
 export default function Chat() {
+    const [messages, setMessages] = useState([])
 
     const chatContainer = {
         display: 'flex', 
@@ -36,6 +38,15 @@ export default function Chat() {
         // height: 450,
     }
 
+    // useEffect(() => {
+    //         socket.onmessage = (e) => {
+    //           console.log("Received message")
+    //             const message1 = JSON.parse(e.data);
+    //             if (message1.message){
+    //                 setMessages(messages => [...messages, message1.message]);
+    //             }
+    // }},[]);
+
     return (
         <div style={chatContainer}>
             
@@ -45,7 +56,7 @@ export default function Chat() {
             </Scrollbars>
             </div>
             <div style={chatInput}>
-                <ChatInput />
+                <ChatInput message={messages}/>
             </div>
         </div>
     )

@@ -5,7 +5,9 @@ const INITIAL_STATE = {
     error: null,
     loading: false,
     videoUrl: '',
-    success: false
+    success: false,
+    playStatus: false,
+    message:[]
 }
 
 const createVideoStart = (state = INITIAL_STATE, action) => {
@@ -37,7 +39,7 @@ const createVideoFailure = (state = INITIAL_STATE, action) => {
     };
 };
 
-const updateVideoStart = (state = INITIAL_STATE, action) => {
+const playVideoStart = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     loading: true,
@@ -45,19 +47,55 @@ const updateVideoStart = (state = INITIAL_STATE, action) => {
   };
 };
 
-const updateVideoSuccess = (state = INITIAL_STATE, action) => {
-  const videoUrl  = action.payload;
-  console.log(action)
+const playVideoSuccess = (state = INITIAL_STATE, action) => {
+  const playStatus  = action.payload;
+  // console.log(playStatus)
   return {
       ...state,
       loading: false,
       success: true,
-      videoUrl,
+      playStatus,
       error: null
   };
 };
 
-const updateVideoFailure = (state = INITIAL_STATE, action) => {
+const playVideoFailure = (state = INITIAL_STATE, action) => {
+// console.log(action.payload.error)
+// const error  = action.payload.error;
+const { error } = action.payload;
+  return {
+    ...state,  
+    loading: false,
+    success:false,
+    error
+  };
+};
+
+const chatUpdateStart = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    loading: true,
+    error: null
+  };
+};
+
+const chatUpdateSuccess = (state = INITIAL_STATE, action) => {
+  // const   = action.payload;
+  // setMessages(messages => [...messages, message1.message]);
+  // console.log(action)
+  state.message = [...state.message, action.payload]
+  // console.log(state.message)
+  const messsage = state.message
+  return {
+      ...state,
+      loading: false,
+      success: true,
+      message: messsage,
+      error: null
+  };
+};
+
+const chatUpdateFailure = (state = INITIAL_STATE, action) => {
 // console.log(action.payload.error)
 // const error  = action.payload.error;
 const { error } = action.payload;
@@ -73,9 +111,13 @@ const HANDLERS = {
   [Types.CREATE_VIDEO_START]: createVideoStart,
   [Types.CREATE_VIDEO_SUCCESS]: createVideoSuccess,
   [Types.CREATE_VIDEO_FAILURE]: createVideoFailure,
-  [Types.UPDATE_VIDEO_START]: updateVideoStart,
-  [Types.UPDATE_VIDEO_SUCCESS]: updateVideoSuccess,
-  [Types.UPDATE_VIDEO_FAILURE]: updateVideoFailure,
+  [Types.PLAY_VIDEO_START]: playVideoStart,
+  [Types.PLAY_VIDEO_SUCCESS]: playVideoSuccess,
+  [Types.PLAY_VIDEO_FAILURE]: playVideoFailure,
+
+  [Types.CHAT_UPDATE_START]: chatUpdateStart,
+  [Types.CHAT_UPDATE_SUCCESS]: chatUpdateSuccess,
+  [Types.CHAT_UPDATE_FAILURE]: chatUpdateFailure,
   }
 
     

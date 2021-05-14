@@ -17,7 +17,22 @@ export function* videoCreateSaga({ payload }) {
 
 export function* videoUpdateSaga({ payload }) {
     try {
+      // console.log(payload)
+      yield put(Creators.playVideoSuccess(payload));
       } 
     catch (error) {
+      console.log(error)
+      yield put(Creators.playVideoFailure(error));
     }
+}
+
+export function* chatUpdateSaga({ payload }) {
+  try {
+    // console.log(payload)
+    yield put(Creators.chatUpdateSuccess(payload));
+    } 
+  catch (error) {
+    console.log(error)
+    yield put(Creators.chatUpdateFailure(error));
+  }
 }

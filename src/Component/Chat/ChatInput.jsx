@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 // import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import SendIcon from '@material-ui/icons/Send';
+import { useDispatch } from 'react-redux';
+import { Creators } from '../Room/store';
 
 
 // const useStyles = makeStyles((theme) => ({
@@ -16,10 +18,13 @@ import SendIcon from '@material-ui/icons/Send';
 function ChatInput() {
 
     const [message, setMessage] = useState('');
-
+    const dispatch = useDispatch()
     const onSubmitMessage = (event) =>{
         event.preventDefault()
-        console.log(message)
+        const payload = {
+            message: message
+          }
+        dispatch(Creators.createVideo(payload))
         setMessage('')
     }
 
